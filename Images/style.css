@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  /* Create three section grid for page */
+  display: grid;
+  grid-template-areas:
+    "healthbar"
+    "sprite"
+    "moves";
+}
+.healthbar {
+  /* Display in top third of page */
+  grid-area: healthbar;
+  display: grid;
+  grid-template-areas: "healthbar-left healthbar-right";
+}
+#healthbar-left {
+  grid-area: healthbar-left;
+}
+#healthbar-right {
+  grid-area: healthbar-right;
+}
+.sprite {
+  /* Display in middle third of page */
+  grid-area: sprite;
+  display: grid;
+  grid-template-areas: "sprite-left sprite-right";
+}
+#sprite-left {
+  grid-area: sprite-left;
+  display: grid;
+  grid-template-areas:
+    "pokemon-img-left"
+    "pokemon-message-left";
+}
+#sprite-right {
+  grid-area: sprite-right;
+  display: grid;
+  grid-template-areas:
+    "pokemon-img-right"
+    "pokemon-message-right";
+}
+.moves {
+  /* Display in bottom third of page */
+  grid-area: moves;
+  display: grid;
+  grid-template-areas: "moves-left moves-right";
+}
+#moves-left {
+  grid-area: moves-left;
+  display: grid;
+  grid-template-areas:
+    "pokemon-left-move1 pokemon-left-move2"
+    "pokemon-left-move3 pokemon-left-move4";
+}
+#moves-right {
+  grid-area: moves-right;
+  display: grid;
+  grid-template-areas:
+    "pokemon-right-move1 pokemon-right-move2"
+    "pokemon-right-move3 pokemon-right-move4";
+}
