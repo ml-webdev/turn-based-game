@@ -10,23 +10,51 @@ body {
     "sprite"
     "moves";
 }
+.container > * {
+  border: 2px solid black;
+  height: 100%;
+  padding: 1.5rem;
+  text-align: center;
+}
 .healthbar {
   /* Display in top third of page */
   grid-area: healthbar;
   display: grid;
   grid-template-areas: "healthbar-left healthbar-right";
+  height: auto;
+  background-color: olivedrab;
+  padding: 3rem;
+}
+.healthbar > * {
+  border: 1px solid blueviolet;
 }
 #healthbar-left {
   grid-area: healthbar-left;
 }
+#healthbar-left > * {
+  border: 1px solid black;
+  padding: 1rem;
+  background-color: antiquewhite;
+}
 #healthbar-right {
   grid-area: healthbar-right;
+}
+#healthbar-right > * {
+  border: 1px solid black;
+  padding: 1rem;
+  background-color: antiquewhite;
 }
 .sprite {
   /* Display in middle third of page */
   grid-area: sprite;
   display: grid;
   grid-template-areas: "sprite-left sprite-right";
+  height: auto;
+  background-color: firebrick;
+  padding: 6.5rem;
+}
+.sprite > * {
+  border: 1px solid goldenrod;
 }
 #sprite-left {
   grid-area: sprite-left;
@@ -35,6 +63,18 @@ body {
     "pokemon-img-left"
     "pokemon-message-left";
 }
+#sprite-left > * {
+  border: 2px solid black;
+  background-color: goldenrod;
+}
+#pokemon-img-left {
+  padding: 6rem;
+}
+#pokemon-message-left {
+  padding: 2rem;
+  background-color: gray;
+}
+
 #sprite-right {
   grid-area: sprite-right;
   display: grid;
@@ -42,11 +82,28 @@ body {
     "pokemon-img-right"
     "pokemon-message-right";
 }
+#sprite-right > * {
+  border: 2px solid black;
+  background-color: goldenrod;
+}
+#pokemon-img-right {
+  padding: 6rem;
+}
+#pokemon-message-right {
+  padding: 2rem;
+  background-color: gray;
+}
 .moves {
   /* Display in bottom third of page */
   grid-area: moves;
   display: grid;
   grid-template-areas: "moves-left moves-right";
+  height: auto;
+  background-color: blueviolet;
+  padding: 5rem;
+}
+.moves > * {
+  border: 1px solid olivedrab;
 }
 #moves-left {
   grid-area: moves-left;
