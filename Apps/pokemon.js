@@ -173,7 +173,7 @@ class Venasaur extends Pokemon{
         this.level = level
         this.gender = gender
         this.name = 'Venasaur'
-        this.type = Grass
+        this.type = 'Grass'
         this.stats = {
             "hp" : 80,
             "attack": 82,
@@ -212,27 +212,40 @@ const checkAccuracy = (pkm, moveIndex) => {
 }
 const typeCheck = (attacker, move, opponent) => {
     var moveType = move[1]
-    console.log(attacker.name + " used " + move[0] + "...\n")
-    
+    console.log(attacker.name + " used " + move[0] + " against " + opponent.name + "...\n")
+
+    superAccumulator = 0
+    notVeryAccumulator = 0
     moveType.superEffective.forEach((item)=>{
-        doubleDamage = 1.0
+        // console.log(item)
+        // console.log(opponent.type)
+        // console.log(item == opponent.type)
+        
         if (item == opponent.type){
-            doubleDamage = 2.0
+            superAccumulator++
+            // return console.log("doubleDamage is " + doubleDamage)
         }
+        // console.log("accumulator: " + superAccumulator)
+        doubleDamage = Math.pow(2, superAccumulator)
+        
     })
     moveType.notVeryEffective.forEach((item)=>{
-        halfDamage = 1
         if (item == opponent.type){
-            halfDamage = 0.5
+            notVeryAccumulator++
         }
+        halfDamage = Math.pow(0.5, notVeryAccumulator)
     })
     moveType.notEffective.forEach((item)=>{
-        noDamage = 1
-        if (item == opponent.type){
+        noDamage = 1.0
+        if (item == opponent.type.name){
             noDamage = 0
         }
     })
+
     let dmgMultiplier = doubleDamage * halfDamage * noDamage
+    // console.log(doubleDamage)
+    // console.log(halfDamage)
+    // console.log(noDamage)
     if (dmgMultiplier == 0){
         return console.log(`It had no effect!`)
     } else if (dmgMultiplier < 1){
@@ -247,4 +260,4 @@ var pokemon1 = new Blastoise('Bubbles', 100, 'Male')
 var pokemon2 = new Charizard( 'Blaze', 100, 'Female')
 var pokemon3 = new Venasaur( 'Ivy', 100, 'Female')
 
-typeCheck(pokemon2, pokemon2.moves[3], pokemon1)
+typeCheck(pokemon1, pokemon1.moves[0], pokemon3)
