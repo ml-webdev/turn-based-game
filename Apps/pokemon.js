@@ -288,8 +288,8 @@ const checkDamage = (attacker, move, defender) => {
 // Attack function
 const attack = (attacker, move, defender) => {
     let randomNumber = randomize()
-    let currentMoveAccuracy = attacker.moves[move][3] * 100
-    let currentMoveName = attacker.moves[move][0]
+    let currentMoveAccuracy = move[3] * 100
+    let currentMoveName = move[0]
     let damage
 
     console.log(attacker.name + " used " + currentMoveName + "!")
