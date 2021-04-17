@@ -128,16 +128,16 @@ class Blastoise extends Pokemon{
             "hp" : 79,
             "attack": 83,
             "defense": 100,
-            "special attack": 85,
-            "special defense": 105,
+            "spAttack": 85,
+            "spDefense": 105,
             "speed": 78
         }
         this.image = new URL('https://www.pngitem.com/pimgs/m/436-4362068_pokemon-blastoise-png-download-pokemon-blastoise-transparent-png.png')
         this.moves = [
-            ['Hydro Pump', Water, 110, 0.80],
-            ['Surf', Water, 90, 1.0],
-            ['Crunch', Dark, 80, 1.0],
-            ['Avalanche', Ice, 60, 1.0]
+            ['Hydro Pump', Water, 110, 0.80, 'special'],
+            ['Surf', Water, 90, 1.0, 'special'],
+            ['Crunch', Dark, 80, 1.0, 'physical'],
+            ['Ice Punch', Ice, 75, 1.0, 'physical']
         ]
     }
 }
@@ -153,16 +153,16 @@ class Charizard extends Pokemon{
             "hp" : 78,
             "attack": 84,
             "defense": 78,
-            "special attack": 109,
-            "special defense": 85,
+            "spAttack": 109,
+            "spDefense": 85,
             "speed": 100
         }
         this.image = new URL('https://image.pngaaa.com/278/1622278-middle.png')
         this.moves = [
-            ['Fire Blast', Fire, 110, 0.85],
-            ['Flamethrower', Fire, 90, 1.0],
-            ['Slash', Normal, 70, 1.0],
-            ['Thunder Punch', Electric, 75, 1.0]
+            ['Fire Blast', Fire, 110, 0.85, 'special'],
+            ['Flamethrower', Fire, 90, 1.0, 'special'],
+            ['Slash', Normal, 70, 1.0, 'physical'],
+            ['Thunder Punch', Electric, 75, 1.0, 'physical']
         ]
     }
 }
@@ -178,16 +178,16 @@ class Venasaur extends Pokemon{
             "hp" : 80,
             "attack": 82,
             "defense": 83,
-            "special attack": 100,
-            "special defense": 100,
+            "spAttack": 100,
+            "spDefense": 100,
             "speed": 85
         }
         this.image = new URL('https://static.wikia.nocookie.net/pokemon-Dark-rising/images/4/42/03_Venusaur-0.png/revision/latest?cb=20180921205847')
         this.moves = [
-                ['Power Whip', Grass, 120, 0.85],
-                ['Giga Drain', Grass, 75, 1.0],
-                ['Body Slam', Normal, 85, 1.0],
-                ['Bulldoze', Ground, 60, 1.0]
+                ['Power Whip', Grass, 120, 0.85, 'physical'],
+                ['Giga Drain', Grass, 75, 1.0, 'special'],
+                ['Body Slam', Normal, 85, 1.0, 'physical'],
+                ['Bulldoze', Ground, 60, 1.0, 'physical']
             ]
         
     }
@@ -197,19 +197,7 @@ class Venasaur extends Pokemon{
 const randomize = () =>{
     return Math.floor(Math.random() * 100)
 }
-const checkAccuracy = (pkm, moveIndex) => {
-    let randomNumber = randomize()
-    let currentMoveAccuracy = pkm.moves[moveIndex][3] * 100
-    let currentMoveName = pkm.moves[moveIndex][0]
 
-    if (currentMoveAccuracy >= randomNumber){
-        console.log(pkm.name + " used " + currentMoveName + "!\nMove accuracy: " + currentMoveAccuracy)
-        console.log("Randomized number: " + randomNumber + ". Attack landed!")
-    } else{
-        console.log(pkm.name + " used " + currentMoveName + "\nMove accuracy: " + currentMoveAccuracy)
-        console.log("Randomized number: " + randomNumber + ". Attack missed!")
-    }
-}
 const typeCheck = (attacker, move, opponent) => {
     var moveType = move[1]
     console.log(attacker.name + " used " + move[0] + " against " + opponent.name + "...\n")
@@ -247,17 +235,77 @@ const typeCheck = (attacker, move, opponent) => {
     // console.log(halfDamage)
     // console.log(noDamage)
     if (dmgMultiplier == 0){
-        return console.log(`It had no effect!`)
+        console.log(`It had no effect!`)
+        return 0
+    } else if (dmgMultiplier > 0 && dmgMultiplier < 0.5){
+        console.log(`It was not very effective.`)
+        return 0.25
     } else if (dmgMultiplier < 1){
-        return console.log(`It was not very effective`)
-    } else if (dmgMultiplier > 1){
-        return console.log(`It was super effective`)
+        console.log(`It was not very effective.`)
+        return 0.5
+    } else if (dmgMultiplier == 1){
+        return 1
+    } else if (dmgMultiplier > 1 && dmgMultiplier < 4){
+        console.log(`It was super effective!`)
+        return 2
+    } else {
+        console.log(`It was super effective!`)
+        return 4
     }
 }
+
+// Now to implement the damage functionality 
+const checkDamage = (attacker, move, defender) => {
+    // damage = ((((   ( (2 * level) / 50 + 2) ) * power * (a / d)   ) / 50) + 2) * modifier
+    let level = ((2 * attacker.level)/ 5) + 2
+    let power = move[2]
+    let a
+    let d 
+    // if move is physical
+    if (move[4] == 'physical'){
+        a = attacker.stats.attack
+        d = defender.stats.defense
+    }
+    // else if move is special
+    else if (move[4] == 'special'){
+        a = attacker.stats.spAttack
+        d = defender.stats.spDefense
+    }
+    const random = () => Math.random() * (1 - 0.85) + 0.85
+    let stab
+    if (attack.type == move[1]){
+        stab = 1.5
+    } else {
+        stab = 1
+    }
+    let type = typeCheck(attacker, move, defender)
+    let modifier = random() * stab * type
+    let damage = ((level * power * (a / d) / 50) + 2) * modifier
+    console.log(attacker.name + " did " + damage + ' points of damage!')
+    return damage
+}
+
+// Attack function
+const attack = (attacker, move, defender) => {
+    let randomNumber = randomize()
+    let currentMoveAccuracy = attacker.moves[move][3] * 100
+    let currentMoveName = attacker.moves[move][0]
+    let damage
+
+    console.log(attacker.name + " used " + currentMoveName + "!")
+    if (currentMoveAccuracy >= randomNumber){
+        damage = checkDamage(attacker, move, defender)
+        return damage
+    } else{
+        console.log("But it missed!")
+    }
+}
+
 
 // Test
 var pokemon1 = new Blastoise('Bubbles', 100, 'Male')
 var pokemon2 = new Charizard( 'Blaze', 100, 'Female')
 var pokemon3 = new Venasaur( 'Ivy', 100, 'Female')
 
-typeCheck(pokemon1, pokemon1.moves[0], pokemon3)
+typeCheck(pokemon2, pokemon2.moves[0], pokemon3)
+attack(pokemon2, pokemon2.moves[0], pokemon3)
