@@ -200,7 +200,6 @@ const randomize = () =>{
 
 const typeCheck = (attacker, move, opponent) => {
     var moveType = move[1]
-    console.log(attacker.name + " used " + move[0] + " against " + opponent.name + "...\n")
 
     superAccumulator = 0
     notVeryAccumulator = 0
@@ -281,7 +280,7 @@ const checkDamage = (attacker, move, defender) => {
     let type = typeCheck(attacker, move, defender)
     let modifier = random() * stab * type
     let damage = ((level * power * (a / d) / 50) + 2) * modifier
-    console.log(attacker.name + " did " + damage + ' points of damage!')
+    console.log(attacker.name + " did " + Math.floor(damage) + ' points of damage!')
     return damage
 }
 
@@ -292,7 +291,7 @@ const attack = (attacker, move, defender) => {
     let currentMoveName = move[0]
     let damage
 
-    console.log(attacker.name + " used " + currentMoveName + "!")
+    console.log(attacker.name + " used " + currentMoveName + " against " + defender.name + "...\n")
     if (currentMoveAccuracy >= randomNumber){
         damage = checkDamage(attacker, move, defender)
         return damage
@@ -307,5 +306,5 @@ var pokemon1 = new Blastoise('Bubbles', 100, 'Male')
 var pokemon2 = new Charizard( 'Blaze', 100, 'Female')
 var pokemon3 = new Venasaur( 'Ivy', 100, 'Female')
 
-typeCheck(pokemon2, pokemon2.moves[0], pokemon3)
+// typeCheck(pokemon2, pokemon2.moves[0], pokemon3)
 attack(pokemon2, pokemon2.moves[0], pokemon3)
