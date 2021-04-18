@@ -8,3 +8,5 @@
 // if healthbar is <= 50% && > 10%, yellow
 // if healthbar is <= 10% && > 0%, red
 // if health is = 0, pokemon faints
+
+import * as Battle from '/Apps/battle.js'
