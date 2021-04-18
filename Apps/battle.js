@@ -125,12 +125,12 @@ export class Blastoise extends Pokemon{
         this.name = 'Blastoise'
         this.type = "Water"
         this.stats = {
-            "hp" : 79,
-            "attack": 83,
-            "defense": 100,
-            "spAttack": 85,
-            "spDefense": 105,
-            "speed": 78
+            "hp" : 362,
+            "attack": 291,
+            "defense": 328,
+            "spAttack": 295,
+            "spDefense": 339,
+            "speed": 280
         }
         this.image = new URL('https://www.pngitem.com/pimgs/m/436-4362068_pokemon-blastoise-png-download-pokemon-blastoise-transparent-png.png')
         this.moves = [
@@ -150,12 +150,12 @@ export class Charizard extends Pokemon{
         this.name = 'Charizard'
         this.type = "Fire"
         this.stats = {
-            "hp" : 78,
-            "attack": 84,
-            "defense": 78,
-            "spAttack": 109,
-            "spDefense": 85,
-            "speed": 100
+            "hp" : 360,
+            "attack": 293,
+            "defense": 280,
+            "spAttack": 348,
+            "spDefense": 295,
+            "speed": 328
         }
         this.image = new URL('https://image.pngaaa.com/278/1622278-middle.png')
         this.moves = [
@@ -175,12 +175,12 @@ export class Venasaur extends Pokemon{
         this.name = 'Venasaur'
         this.type = 'Grass'
         this.stats = {
-            "hp" : 80,
-            "attack": 82,
-            "defense": 83,
-            "spAttack": 100,
-            "spDefense": 100,
-            "speed": 85
+            "hp" : 364,
+            "attack": 289,
+            "defense": 291,
+            "spAttack": 328,
+            "spDefense": 328,
+            "speed": 284
         }
         this.image = new URL('https://static.wikia.nocookie.net/pokemon-Dark-rising/images/4/42/03_Venusaur-0.png/revision/latest?cb=20180921205847')
         this.moves = [
@@ -201,9 +201,12 @@ export const randomize = () =>{
 
 export const typeCheck = (move, opponent) => {
     var moveType = move[1]
+    let doubleDamage
+    let halfDamage
+    let noDamage
 
-    superAccumulator = 0
-    notVeryAccumulator = 0
+    let superAccumulator = 0
+    let notVeryAccumulator = 0
     moveType.superEffective.forEach((item)=>{
         // console.log(item)
         // console.log(opponent.type)

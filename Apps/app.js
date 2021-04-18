@@ -35,16 +35,15 @@ var moveRight4 = document.getElementById('pokemon-right-move4')
 
 // FUNCTIONS
 const userLeftPkm = () => {
-    let pkmLeft
     let leftNumChoice = prompt("Player 1: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-    let name = prompt("What would you like to call your Pokemon?")
     let gender = prompt("Is your pokemon 'Male' or 'Female'?")
+    let name = prompt("What would you like to call your Pokemon?")
     if(leftNumChoice > 3 || leftNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         userLeftPkm()
     } else if (leftNumChoice == 1){
         pkmLeft = new Battle.Blastoise(`${name}`, 100, `${gender}`)
-        // console.log(pkmLeft.name)
+        // console.log(pkmLeft.nickname)
     } else if (leftNumChoice == 2){
         pkmLeft = new Battle.Charizard(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.type)
@@ -52,13 +51,33 @@ const userLeftPkm = () => {
         pkmLeft = new Battle.Venasaur(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.moves)
     }
+    return pkmLeft
 
 }
-userLeftPkm()
+const userRightPkm = () => {
+    let rightNumChoice = prompt("Player 2: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
+    let gender = prompt("Is your pokemon 'Male' or 'Female'?")
+    let name = prompt("What would you like to call your Pokemon?")
+    if(rightNumChoice > 3 || rightNumChoice < 1){
+        alert('You must choose either 1, 2, or 3')
+        userRightPkm()
+    } else if (rightNumChoice == 1){
+        pkmRight = new Battle.Blastoise(`${name}`, 100, `${gender}`)
+        // console.log(pkmRight.nickname)
+    } else if (rightNumChoice == 2){
+        pkmRight = new Battle.Charizard(`${name}`, 100, `${gender}`)
+        // console.log(pkmRight.type)
+    } else if (rightNumChoice == 3){
+        pkmRight = new Battle.Venasaur(`${name}`, 100, `${gender}`)
+        // console.log(pkmRight.moves)
+    }
+    return pkmRight
 
-
-const userRightPkm = () => prompt("Player 2: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-
+}
+var pkmLeft = userLeftPkm()
+var pkmRight = userRightPkm()
+console.log(pkmLeft)
+console.log(pkmRight)
 
 const populateMovesLeft = (pkmMovelist) =>{
     moveLeft1.innerHTML = pkmMovelist[0][0]
@@ -67,39 +86,43 @@ const populateMovesLeft = (pkmMovelist) =>{
     moveLeft4.innerHTML = pkmMovelist[3][0]
 }
 const populateMovesRight = (pkmMovelist) =>{
-    moveLeft1.innerHTML = pkmMovelist[0][0]
-    moveLeft2.innerHTML = pkmMovelist[1][0]
-    moveLeft3.innerHTML = pkmMovelist[2][0]
-    moveLeft4.innerHTML = pkmMovelist[3][0]
+    moveRight1.innerHTML = pkmMovelist[0][0]
+    moveRight2.innerHTML = pkmMovelist[1][0]
+    moveRight3.innerHTML = pkmMovelist[2][0]
+    moveRight4.innerHTML = pkmMovelist[3][0]
 }
+populateMovesLeft(pkmLeft.moves)
+populateMovesRight(pkmRight.moves)
 
 
 
 
 // EVENT LISTENERS
 moveLeft1.addEventListener('click', ()=>{
-    console.log(moveLeft1)
+    Battle.attack(pkmLeft, pkmLeft.moves[0], pkmRight)
 })
 moveLeft2.addEventListener('click', ()=>{
-    console.log(moveLeft2)
+    Battle.attack(pkmLeft, pkmLeft.moves[1], pkmRight)
 })
 moveLeft3.addEventListener('click', ()=>{
-    console.log(moveLeft3)
+    Battle.attack(pkmLeft, pkmLeft.moves[2], pkmRight)
 })
 moveLeft4.addEventListener('click', ()=>{
-    console.log(moveLeft4)
+    Battle.attack(pkmLeft, pkmLeft.moves[3], pkmRight)
 })
+
+
 moveRight1.addEventListener('click', ()=>{
-    console.log(moveRight1)
+    Battle.attack(pkmRight, pkmRight.moves[0], pkmLeft)
 })
 moveRight2.addEventListener('click', ()=>{
-    console.log(moveRight2)
+    Battle.attack(pkmRight, pkmRight.moves[1], pkmLeft)
 })
 moveRight3.addEventListener('click', ()=>{
-    console.log(moveRight3)
+    Battle.attack(pkmRight, pkmRight.moves[2], pkmLeft)
 })
 moveRight4.addEventListener('click', ()=>{
-    console.log(moveRight4)
+    Battle.attack(pkmRight, pkmRight.moves[3], pkmLeft)
 })
 
 
