@@ -198,7 +198,8 @@ const randomize = () =>{
     return Math.floor(Math.random() * 100)
 }
 
-const typeCheck = (attacker, move, opponent) => {
+
+const typeCheck = (move, opponent) => {
     var moveType = move[1]
 
     superAccumulator = 0
@@ -240,7 +241,7 @@ const typeCheck = (attacker, move, opponent) => {
         console.log(`It was not very effective.`)
         return 0.25
     } else if (dmgMultiplier < 1){
-        console.log(`It was not very effective.`)
+        console.log(`It was not very effective!`)
         return 0.5
     } else if (dmgMultiplier == 1){
         return 1
@@ -277,7 +278,7 @@ const checkDamage = (attacker, move, defender) => {
     } else {
         stab = 1
     }
-    let type = typeCheck(attacker, move, defender)
+    let type = typeCheck(move, defender)
     let modifier = random() * stab * type
     let damage = ((level * power * (a / d) / 50) + 2) * modifier
     console.log(attacker.name + " did " + Math.floor(damage) + ' points of damage!')
@@ -291,12 +292,21 @@ const attack = (attacker, move, defender) => {
     let currentMoveName = move[0]
     let damage
 
-    console.log(attacker.name + " used " + currentMoveName + " against " + defender.name + "...\n")
+    // Display this in the message box
+    console.log(attacker.name + " used " + currentMoveName + " against " + defender.name + "...")
     if (currentMoveAccuracy >= randomNumber){
         damage = checkDamage(attacker, move, defender)
+        // toggleAttackFlash()
+        // toggleOpacity()
+        // animateHealthBar()
+        // checkKO()
+            // if checkKO == true, use faint() function
+        // endTurn()
         return damage
     } else{
         console.log("But it missed!")
+        // endTurn()
+        return 0
     }
 }
 
@@ -307,4 +317,4 @@ var pokemon2 = new Charizard( 'Blaze', 100, 'Female')
 var pokemon3 = new Venasaur( 'Ivy', 100, 'Female')
 
 // typeCheck(pokemon2, pokemon2.moves[0], pokemon3)
-attack(pokemon2, pokemon2.moves[0], pokemon3)
+attack(pokemon1, pokemon1.moves[0], pokemon3)
