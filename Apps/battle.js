@@ -1,107 +1,107 @@
 /* Types*/
-var Normal = {
+export var Normal = {
     "name" : "Normal",
     "notEffective" : ['Ghost'],
     "superEffective":  [false],
     "notVeryEffective": ['Rock', 'Steel']
 }
-var Fire = {
+export var Fire = {
     "name" : "Fire",
     "notEffective" : [false],
     "superEffective":  ['Bug', 'Grass', 'Ice', 'Steel'],
     "notVeryEffective": ['Dragon', 'Fire', 'Rock', 'Water']
 }
-var Fighting = {
+export var Fighting = {
     "name" : "Fighting",
     "notEffective" : ['Ghost'],
     "superEffective":  ['Dark', 'Ice', 'Normal', 'Rock', 'Steel'],
     "notVeryEffective": ['Bug', 'Fairy', 'Flying', 'Poison', 'Psychic']
 }
-var Water = {
+export var Water = {
     "name" : "Water",
     "notEffective" : [false],
     "superEffective": ['Fire', 'Ground', 'Rock'],
     "notVeryEffective": ["Water", "Grass", "Dragon"]
 }
-var Flying = {
+export var Flying = {
     "name" : "Flying",
     "notEffective" : [false],
     "superEffective":  ['Bug', 'Grass', 'fighting'],
     "notVeryEffective": ['Electric', 'Rock', 'Steel']
 }
-var Grass = {
+export var Grass = {
     "name" : "Grass",
     "notEffective" : [false],
     "superEffective": ['Water', 'Rock', 'Ground'],
     "notVeryEffective": ['Fire', 'Grass', 'Poison', 'Flying', 'Bug', 'Dragon', 'Steel']
 }
-var Poison = {
+export var Poison = {
     "name" : "Poison",
     "notEffective" : ['Steel'],
     "notVeryEffective": ['Poison', 'Ground', 'Rock', 'Ghost'],
     "superEffective":  ['Fairy', 'Grass'],
 }
-var Electric = {
+export var Electric = {
     "name" : "Electric",
     "notEffective" : ['Ground'],
     "superEffective":  ['Flying', 'Water'],
     "notVeryEffective": ['Dragon', 'Electric', 'Grass']
 }
-var Ground = {
+export var Ground = {
     "name" : "Ground",
     "notEffective" : ['Flying'],
     "superEffective":  ['Electric', 'Fire', 'Poison', 'Rock', 'Steel'],
     "notVeryEffective": ['Bug', 'Grass']
 }
-var Psychic = {
+export var Psychic = {
     "name" : "Psychic",
     "notEffective" : ['Dark'],
     "superEffective":  ['fighting', 'Poison'],
     "notVeryEffective": ['Psychic', 'Steel']
 }
-var Rock = {
+export var Rock = {
     "name" : "Rock",
     "notEffective" : [false],
     "notVeryEffective": ['Fighting', 'Ground', 'Steel'],
     "superEffective":  ['Bug', 'Fire', 'Flying', 'Ice'],
 }
-var Ice = {
+export var Ice = {
     "name" : "Ice",
     "notEffective" : [false],
     "superEffective":  ['Dragon', 'Flying', 'Grass', 'ground'],
     "notVeryEffective": ['Fire', 'Ice', 'Steel', 'Water']
 }
-var Bug = {
+export var Bug = {
     "name" : "Bug",
     "notEffective" : [false],
     "superEffective":  ['Grass', 'Psychic', 'Dark'],
     "notVeryEffective": ['Fire', 'Fighting', 'Poison', 'Flying', 'Ghost', 'Steel', 'Fairy']
 }
-var Dragon = {
+export var Dragon = {
     "name" : "Dragon",
     "notEffective" : ['Fairy'],
     "superEffective":  ['Dragon'],
     "notVeryEffective": ['Steel']
 }
-var Ghost = {
+export var Ghost = {
     "name" : "Ghost",
     "notEffective" : ['Normal'],
     "superEffective":  ['Ghost', 'Psychic'],
     "notVeryEffective": ['Dark']
 }
-var Dark = {
+export var Dark = {
     "name" : "Dark",
     "notEffective" : [false],
     "superEffective":  ['Ghost', 'Psychic'],
     "notVeryEffective": ['Dark', 'Fairy', 'fighting']
 }
-var Steel = {
+export var Steel = {
     "name" : "Steel",
     "notEffective" : [false],
     "superEffective":  ['Fairy', 'Ice', 'Rock'],
     "notVeryEffective": ['Electric', 'Fire', 'Steel', 'Water']
 }
-var Fairy = {
+export var Fairy = {
     "name" : "Fairy",
     "notEffective" : [false],
     "superEffective":  ['Dark', 'Dragon', 'fighting'],
@@ -110,14 +110,14 @@ var Fairy = {
 }
 
 // Classes
-class Pokemon{
+export class Pokemon{
     constructor(nickname, level){
         this.nickname = nickname
         this.level = level
     }
 }
 
-class Blastoise extends Pokemon{
+export class Blastoise extends Pokemon{
     constructor(nickname, level, gender){
         super(nickname, level)
         // pokemon will be an object with level, gender, Pokemon name, image, type
@@ -141,7 +141,7 @@ class Blastoise extends Pokemon{
         ]
     }
 }
-class Charizard extends Pokemon{
+export class Charizard extends Pokemon{
     constructor(nickname, level, gender){
         super(nickname, level)
         // pokemon will be an object with level, gender, Pokemon name, image, type
@@ -166,7 +166,7 @@ class Charizard extends Pokemon{
         ]
     }
 }
-class Venasaur extends Pokemon{
+export class Venasaur extends Pokemon{
     constructor(nickname, level, gender){
         super(nickname, level)
         // pokemon will be an object with level, gender, Pokemon name, image, type
@@ -194,12 +194,12 @@ class Venasaur extends Pokemon{
 }
 
 // Functions
-const randomize = () =>{
+export const randomize = () =>{
     return Math.floor(Math.random() * 100)
 }
 
 
-const typeCheck = (move, opponent) => {
+export const typeCheck = (move, opponent) => {
     var moveType = move[1]
 
     superAccumulator = 0
@@ -255,7 +255,7 @@ const typeCheck = (move, opponent) => {
 }
 
 // Now to implement the damage functionality 
-const checkDamage = (attacker, move, defender) => {
+export const checkDamage = (attacker, move, defender) => {
     // damage = ((((   ( (2 * level) / 50 + 2) ) * power * (a / d)   ) / 50) + 2) * modifier
     let level = ((2 * attacker.level)/ 5) + 2
     let power = move[2]
@@ -286,7 +286,7 @@ const checkDamage = (attacker, move, defender) => {
 }
 
 // Attack function
-const attack = (attacker, move, defender) => {
+export const attack = (attacker, move, defender) => {
     let randomNumber = randomize()
     let currentMoveAccuracy = move[3] * 100
     let currentMoveName = move[0]
@@ -312,9 +312,9 @@ const attack = (attacker, move, defender) => {
 
 
 // Test
-var pokemon1 = new Blastoise('Bubbles', 100, 'Male')
-var pokemon2 = new Charizard( 'Blaze', 100, 'Female')
-var pokemon3 = new Venasaur( 'Ivy', 100, 'Female')
+// var pokemon1 = new Blastoise('Bubbles', 100, 'Male')
+// var pokemon2 = new Charizard( 'Blaze', 100, 'Female')
+// var pokemon3 = new Venasaur( 'Ivy', 100, 'Female')
 
 // typeCheck(pokemon2, pokemon2.moves[0], pokemon3)
-attack(pokemon1, pokemon1.moves[0], pokemon3)
+// attack(pokemon1, pokemon1.moves[0], pokemon3)
