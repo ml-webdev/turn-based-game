@@ -37,17 +37,19 @@ var moveRight4 = document.getElementById('pokemon-right-move4')
 const userLeftPkm = () => {
     let pkmLeft
     let leftNumChoice = prompt("Player 1: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
+    let name = prompt("What would you like to call your Pokemon?")
+    let gender = prompt("Is your pokemon 'Male' or 'Female'?")
     if(leftNumChoice > 3 || leftNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         userLeftPkm()
     } else if (leftNumChoice == 1){
-        pkmLeft = new Battle.Blastoise('Blastoise', 100, 'Male')
+        pkmLeft = new Battle.Blastoise(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.name)
     } else if (leftNumChoice == 2){
-        pkmLeft = new Battle.Charizard('Charizard', 100, 'Male')
+        pkmLeft = new Battle.Charizard(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.type)
     } else if (leftNumChoice == 3){
-        pkmLeft = new Battle.Venasaur('Venasaur', 100, 'Female')
+        pkmLeft = new Battle.Venasaur(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.moves)
     }
 
