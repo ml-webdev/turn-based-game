@@ -378,7 +378,7 @@ export const userLeftPkm = () => {
     var pkmLeft
     if(leftNumChoice > 3 || leftNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
-        userLeftPkm()
+        return userLeftPkm()
     } else if (leftNumChoice == 1){
         // console.log(Battle)
         pkmLeft = new Blastoise(`Blastoise`, 100, `Male`)
@@ -402,7 +402,7 @@ export const userRightPkm = () => {
     var pkmRight
     if(rightNumChoice > 3 || rightNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
-        userRightPkm()
+        return userRightPkm()
     } else if (rightNumChoice == 1){
         pkmRight = new Blastoise(`Blastoise`, 100, `Female`)
         // console.log(pkmRight.nickname)
