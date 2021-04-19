@@ -1,4 +1,5 @@
 import * as Battle from '/Apps/battle.js'
+import * as App from '/Apps/app.js'
 
 // VARIABLES
 export var movesLeft = document.getElementById('moves-left')
@@ -14,22 +15,364 @@ export var moveRight3 = document.getElementById('pokemon-right-move3')
 export var moveRight4 = document.getElementById('pokemon-right-move4')
 
 
+
+/* Types*/
+export var Normal = {
+    "name" : "Normal",
+    "notEffective" : ['Ghost'],
+    "superEffective":  [false],
+    "notVeryEffective": ['Rock', 'Steel']
+}
+export var Fire = {
+    "name" : "Fire",
+    "notEffective" : [false],
+    "superEffective":  ['Bug', 'Grass', 'Ice', 'Steel'],
+    "notVeryEffective": ['Dragon', 'Fire', 'Rock', 'Water']
+}
+export var Fighting = {
+    "name" : "Fighting",
+    "notEffective" : ['Ghost'],
+    "superEffective":  ['Dark', 'Ice', 'Normal', 'Rock', 'Steel'],
+    "notVeryEffective": ['Bug', 'Fairy', 'Flying', 'Poison', 'Psychic']
+}
+export var Water = {
+    "name" : "Water",
+    "notEffective" : [false],
+    "superEffective": ['Fire', 'Ground', 'Rock'],
+    "notVeryEffective": ["Water", "Grass", "Dragon"]
+}
+export var Flying = {
+    "name" : "Flying",
+    "notEffective" : [false],
+    "superEffective":  ['Bug', 'Grass', 'fighting'],
+    "notVeryEffective": ['Electric', 'Rock', 'Steel']
+}
+export var Grass = {
+    "name" : "Grass",
+    "notEffective" : [false],
+    "superEffective": ['Water', 'Rock', 'Ground'],
+    "notVeryEffective": ['Fire', 'Grass', 'Poison', 'Flying', 'Bug', 'Dragon', 'Steel']
+}
+export var Poison = {
+    "name" : "Poison",
+    "notEffective" : ['Steel'],
+    "notVeryEffective": ['Poison', 'Ground', 'Rock', 'Ghost'],
+    "superEffective":  ['Fairy', 'Grass'],
+}
+export var Electric = {
+    "name" : "Electric",
+    "notEffective" : ['Ground'],
+    "superEffective":  ['Flying', 'Water'],
+    "notVeryEffective": ['Dragon', 'Electric', 'Grass']
+}
+export var Ground = {
+    "name" : "Ground",
+    "notEffective" : ['Flying'],
+    "superEffective":  ['Electric', 'Fire', 'Poison', 'Rock', 'Steel'],
+    "notVeryEffective": ['Bug', 'Grass']
+}
+export var Psychic = {
+    "name" : "Psychic",
+    "notEffective" : ['Dark'],
+    "superEffective":  ['fighting', 'Poison'],
+    "notVeryEffective": ['Psychic', 'Steel']
+}
+export var Rock = {
+    "name" : "Rock",
+    "notEffective" : [false],
+    "notVeryEffective": ['Fighting', 'Ground', 'Steel'],
+    "superEffective":  ['Bug', 'Fire', 'Flying', 'Ice'],
+}
+export var Ice = {
+    "name" : "Ice",
+    "notEffective" : [false],
+    "superEffective":  ['Dragon', 'Flying', 'Grass', 'ground'],
+    "notVeryEffective": ['Fire', 'Ice', 'Steel', 'Water']
+}
+export var Bug = {
+    "name" : "Bug",
+    "notEffective" : [false],
+    "superEffective":  ['Grass', 'Psychic', 'Dark'],
+    "notVeryEffective": ['Fire', 'Fighting', 'Poison', 'Flying', 'Ghost', 'Steel', 'Fairy']
+}
+export var Dragon = {
+    "name" : "Dragon",
+    "notEffective" : ['Fairy'],
+    "superEffective":  ['Dragon'],
+    "notVeryEffective": ['Steel']
+}
+export var Ghost = {
+    "name" : "Ghost",
+    "notEffective" : ['Normal'],
+    "superEffective":  ['Ghost', 'Psychic'],
+    "notVeryEffective": ['Dark']
+}
+export var Dark = {
+    "name" : "Dark",
+    "notEffective" : [false],
+    "superEffective":  ['Ghost', 'Psychic'],
+    "notVeryEffective": ['Dark', 'Fairy', 'fighting']
+}
+export var Steel = {
+    "name" : "Steel",
+    "notEffective" : [false],
+    "superEffective":  ['Fairy', 'Ice', 'Rock'],
+    "notVeryEffective": ['Electric', 'Fire', 'Steel', 'Water']
+}
+export var Fairy = {
+    "name" : "Fairy",
+    "notEffective" : [false],
+    "superEffective":  ['Dark', 'Dragon', 'fighting'],
+    "notVeryEffective": ['Fire', 'Poison', 'Steel']
+
+}
+
+export var newGame = true
+
+// Classes
+export class Pokemon{
+    constructor(nickname, level){
+        this.nickname = nickname
+        this.level = level
+    }
+}
+
+export class Blastoise extends Pokemon{
+    constructor(nickname, level, gender){
+        super(nickname, level)
+        // pokemon will be an object with level, gender, Pokemon name, image, type
+        this.gender = gender
+        this.name = 'Blastoise'
+        this.type = "Water"
+        this.stats = {
+            "hp" : 362,
+            "attack": 291,
+            "defense": 328,
+            "spAttack": 295,
+            "spDefense": 339,
+            "speed": 280
+        }
+        this.image = new URL('https://www.pngitem.com/pimgs/m/436-4362068_pokemon-blastoise-png-download-pokemon-blastoise-transparent-png.png')
+        this.moves = [
+            ['Hydro Pump', Water, 110, 0.80, 'special'],
+            ['Surf', Water, 90, 1.0, 'special'],
+            ['Crunch', Dark, 80, 1.0, 'physical'],
+            ['Ice Punch', Ice, 75, 1.0, 'physical']
+        ]
+    }
+}
+export class Charizard extends Pokemon{
+    constructor(nickname, level, gender){
+        super(nickname, level)
+        // pokemon will be an object with level, gender, Pokemon name, image, type
+        this.level = level
+        this.gender = gender
+        this.name = 'Charizard'
+        this.type = "Fire"
+        this.stats = {
+            "hp" : 360,
+            "attack": 293,
+            "defense": 280,
+            "spAttack": 348,
+            "spDefense": 295,
+            "speed": 328
+        }
+        this.image = new URL('https://image.pngaaa.com/278/1622278-middle.png')
+        this.moves = [
+            ['Fire Blast', Fire, 110, 0.85, 'special'],
+            ['Flamethrower', Fire, 90, 1.0, 'special'],
+            ['Slash', Normal, 70, 1.0, 'physical'],
+            ['Thunder Punch', Electric, 75, 1.0, 'physical']
+        ]
+    }
+}
+export class Venasaur extends Pokemon{
+    constructor(nickname, level, gender){
+        super(nickname, level)
+        // pokemon will be an object with level, gender, Pokemon name, image, type
+        this.level = level
+        this.gender = gender
+        this.name = 'Venasaur'
+        this.type = 'Grass'
+        this.stats = {
+            "hp" : 364,
+            "attack": 289,
+            "defense": 291,
+            "spAttack": 328,
+            "spDefense": 328,
+            "speed": 284
+        }
+        this.image = new URL('https://static.wikia.nocookie.net/pokemon-Dark-rising/images/4/42/03_Venusaur-0.png/revision/latest?cb=20180921205847')
+        this.moves = [
+                ['Power Whip', Grass, 120, 0.85, 'physical'],
+                ['Giga Drain', Grass, 75, 1.0, 'special'],
+                ['Body Slam', Normal, 85, 1.0, 'physical'],
+                ['Bulldoze', Ground, 60, 1.0, 'physical']
+            ]
+        
+    }
+}
+
+// Functions
+export const randomize = () =>{
+    return Math.floor(Math.random() * 100)
+}
+
+
+export const typeCheck = (move, opponent) => {
+    var moveType = move[1]
+    let doubleDamage
+    let halfDamage
+    let noDamage
+
+    let superAccumulator = 0
+    let notVeryAccumulator = 0
+    moveType.superEffective.forEach((item)=>{
+        // console.log(item)
+        // console.log(opponent.type)
+        // console.log(item == opponent.type)
+        
+        if (item == opponent.type){
+            superAccumulator++
+            // return console.log("doubleDamage is " + doubleDamage)
+        }
+        // console.log("accumulator: " + superAccumulator)
+        doubleDamage = Math.pow(2, superAccumulator)
+        
+    })
+    moveType.notVeryEffective.forEach((item)=>{
+        if (item == opponent.type){
+            notVeryAccumulator++
+        }
+        halfDamage = Math.pow(0.5, notVeryAccumulator)
+    })
+    moveType.notEffective.forEach((item)=>{
+        noDamage = 1.0
+        if (item == opponent.type.name){
+            noDamage = 0
+        }
+    })
+
+    let dmgMultiplier = doubleDamage * halfDamage * noDamage
+    // console.log(doubleDamage)
+    // console.log(halfDamage)
+    // console.log(noDamage)
+    if (dmgMultiplier == 0){
+        console.log(`It had no effect!`)
+        return 0
+    } else if (dmgMultiplier > 0 && dmgMultiplier < 0.5){
+        console.log(`It was not very effective.`)
+        return 0.25
+    } else if (dmgMultiplier < 1){
+        console.log(`It was not very effective!`)
+        return 0.5
+    } else if (dmgMultiplier == 1){
+        return 1
+    } else if (dmgMultiplier > 1 && dmgMultiplier < 4){
+        console.log(`It was super effective!`)
+        return 2
+    } else {
+        console.log(`It was super effective!`)
+        return 4
+    }
+}
+
+// Now to implement the damage functionality 
+export const checkDamage = (attacker, move, defender) => {
+    // damage = ((((   ( (2 * level) / 50 + 2) ) * power * (a / d)   ) / 50) + 2) * modifier
+    let level = ((2 * attacker.level)/ 5) + 2
+    let power = move[2]
+    let a
+    let d 
+    // if move is physical
+    if (move[4] == 'physical'){
+        a = attacker.stats.attack
+        d = defender.stats.defense
+    }
+    // else if move is special
+    else if (move[4] == 'special'){
+        a = attacker.stats.spAttack
+        d = defender.stats.spDefense
+    }
+    const random = () => Math.random() * (1 - 0.85) + 0.85
+    let stab
+    if (attack.type == move[1]){
+        stab = 1.5
+    } else {
+        stab = 1
+    }
+    let type = typeCheck(move, defender)
+    let modifier = random() * stab * type
+    let damage = ((level * power * (a / d) / 50) + 2) * modifier
+    console.log(attacker.name + " did " + Math.floor(damage) + ' points of damage!')
+    return damage
+}
+let damage = 0
+
+// Attack function
+export const attack = (attacker, move, defender) => {
+    let randomNumber = randomize()
+    let currentMoveAccuracy = move[3] * 100
+    let currentMoveName = move[0]
+
+    // Display this in the message box
+    console.log(attacker.name + " used " + currentMoveName + " against " + defender.name + "...")
+    if (currentMoveAccuracy >= randomNumber){
+        damage = checkDamage(attacker, move, defender)
+        // toggleAttackFlash()
+        // toggleOpacity()
+        // animateHealthBar()
+        // updateHealthRight()
+        // updateHealthLeft()
+        // checkKO()
+            // if checkKO == true, use faint() function
+        // endTurn()
+        newGame = false
+        return damage
+    } else{
+        console.log("But it missed!")
+        // endTurn()
+        newGame = false
+        return damage = 0
+    }
+}
+
+// console.log(App.newGame)
+
+// export var healthbarLeft = document.getElementById("healthbar-left-hp").style.width
+// console.log("Health bar left " + healthbarLeft)
+// export var healthbarRight = document.getElementById("healthbar-right-hp").style.width
+// console.log(playerRightHealth)
+
+
+
 // FUNCTIONS
+export const updateHealthBarLeft = (width) => {
+    document.getElementById("healthbar-left-hp").style.width = `${width * 100}%`
+    // console.log(healthbarLeft)
+}
+export const updateHealthBarRight = (width) => {
+    document.getElementById("healthbar-right-hp").style.width = `${width * 100}%`
+    // console.log(healthbarRight)
+
+}
 export const userLeftPkm = () => {
     let leftNumChoice = prompt("Player 1: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
     let gender = prompt("Is your pokemon 'Male' or 'Female'?")
     let name = prompt("What would you like to call your Pokemon?")
+    var pkmLeft
     if(leftNumChoice > 3 || leftNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         userLeftPkm()
     } else if (leftNumChoice == 1){
-        pkmLeft = new Battle.Blastoise(`${name}`, 100, `${gender}`)
+        console.log(Battle)
+        pkmLeft = new Blastoise(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.nickname)
     } else if (leftNumChoice == 2){
-        pkmLeft = new Battle.Charizard(`${name}`, 100, `${gender}`)
+        pkmLeft = new Charizard(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.type)
     } else if (leftNumChoice == 3){
-        pkmLeft = new Battle.Venasaur(`${name}`, 100, `${gender}`)
+        pkmLeft = new Venasaur(`${name}`, 100, `${gender}`)
         // console.log(pkmLeft.moves)
     }
     return pkmLeft
@@ -39,17 +382,19 @@ export const userRightPkm = () => {
     let rightNumChoice = prompt("Player 2: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
     let gender = prompt("Is your pokemon 'Male' or 'Female'?")
     let name = prompt("What would you like to call your Pokemon?")
+    var pkmRight
     if(rightNumChoice > 3 || rightNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         userRightPkm()
     } else if (rightNumChoice == 1){
-        pkmRight = new Battle.Blastoise(`${name}`, 100, `${gender}`)
+        pkmRight = new Blastoise(`${name}`, 100, `${gender}`)
         // console.log(pkmRight.nickname)
     } else if (rightNumChoice == 2){
-        pkmRight = new Battle.Charizard(`${name}`, 100, `${gender}`)
+        pkmRight = new Charizard(`${name}`, 100, `${gender}`)
         // console.log(pkmRight.type)
     } else if (rightNumChoice == 3){
-        pkmRight = new Battle.Venasaur(`${name}`, 100, `${gender}`)
+        pkmRight = new Venasaur(`${name}`, 100, `${gender}`)
+
         // console.log(pkmRight.moves)
     }
     return pkmRight
@@ -57,8 +402,78 @@ export const userRightPkm = () => {
 }
 export var pkmLeft = userLeftPkm()
 export var pkmRight = userRightPkm()
-console.log(pkmLeft)
-console.log(pkmRight)
+
+// console.log(pkmLeft)
+// console.log(pkmRight)
+// Moves.pkmLeft
+// Moves.pkmRight
+// health starts out at 100%, which is the total hp of the pokemon
+    // updateHealthLeft function
+    var leftCurrentHealth = pkmLeft.stats.hp
+    export const updateHealthLeft = () =>{
+        // if (newGame == true){
+            // player1 healthbar = pkmLeft.health
+            // playerLeftHealth = pkmLeft.stats.hp
+            // console.log(playerLeftHealth)
+
+        // }
+        // else {
+            // console.log("Moves.pkmLeft.health: " + Moves.pkmLeft)
+            if(leftCurrentHealth - damage <= 0){
+                leftCurrentHealth = 0
+            } else{
+                leftCurrentHealth -= damage
+            }
+            var playerLeftHealth = leftCurrentHealth / pkmLeft.stats.hp
+        console.log("Left health is updated: " + playerLeftHealth)
+        updateHealthBarLeft(playerLeftHealth)
+        // }
+
+    } 
+    var rightCurrentHealth = pkmRight.stats.hp
+    export const updateHealthRight = () => {
+        // if (newGame == true){
+            // player1 healthbar = pkmLeft.health
+            // playerRightHealth = pkmRight.health
+            
+        // }
+        // else {
+            if(rightCurrentHealth - damage <= 0){
+                rightCurrentHealth = 0
+            } else{
+                rightCurrentHealth -= damage
+            }            
+            var playerRightHealth = rightCurrentHealth / pkmRight.stats.hp
+        //     console.log(Battle.damage)
+        console.log("Right health is updated: " + playerRightHealth)
+        updateHealthBarRight(playerRightHealth)
+
+        // }
+        
+    }
+// updateHealthLeft()
+// updateHealthRight() 
+    // export var updateLeft = updateHealthLeft()
+    // export var updateRight = updateHealthRight()
+    // updateHealthRight function
+        // if (newGame == true)
+            // player2 healthbar.value = pkmRight.health
+        // else {
+            // rightCurrentHealth = pkmRight.health - damage
+            // player1 healthbar.value = rightCurrentHealth / pkmRight.health
+        // }
+
+//
+
+// if move misses, end turn
+    // else if move hits toggle opacity for defending pokemon
+// health subtracts number returned from attack function
+    // health -= attack()
+// keyframe transition for health bar
+// if healthbar is > 50%, green
+// if healthbar is <= 50% && > 10%, yellow
+// if healthbar is <= 10% && > 0%, red
+// if health is = 0, pokemon faints
 
 export const populateMovesLeft = (pkmMovelist) =>{
     moveLeft1.innerHTML = pkmMovelist[0][0]
@@ -72,38 +487,49 @@ export const populateMovesRight = (pkmMovelist) =>{
     moveRight3.innerHTML = pkmMovelist[2][0]
     moveRight4.innerHTML = pkmMovelist[3][0]
 }
-export var populateMovesLeft(pkmLeft.moves)
-export var populateMovesRight(pkmRight.moves)
+export var populateLeft = populateMovesLeft(pkmLeft.moves)
+export var populateRight = populateMovesRight(pkmRight.moves)
 
 
 
 
 // EVENT LISTENERS
 export var leftMoveOne = moveLeft1.addEventListener('click', ()=>{
-    Battle.attack(pkmLeft, pkmLeft.moves[0], pkmRight)
+    attack(pkmLeft, pkmLeft.moves[0], pkmRight)
+    updateHealthRight()
 })
 export var leftMoveTwo = moveLeft2.addEventListener('click', ()=>{
-    Battle.attack(pkmLeft, pkmLeft.moves[1], pkmRight)
+    attack(pkmLeft, pkmLeft.moves[1], pkmRight)
+    updateHealthRight()
+
 })
 export var leftMoveThree = moveLeft3.addEventListener('click', ()=>{
-    Battle.attack(pkmLeft, pkmLeft.moves[2], pkmRight)
+    attack(pkmLeft, pkmLeft.moves[2], pkmRight)
+    updateHealthRight()
+
 })
 export var leftMoveFour = moveLeft4.addEventListener('click', ()=>{
-    Battle.attack(pkmLeft, pkmLeft.moves[3], pkmRight)
+    attack(pkmLeft, pkmLeft.moves[3], pkmRight)
+    updateHealthRight()
+
 })
 
 
 export var rightMoveOne = moveRight1.addEventListener('click', ()=>{
-    Battle.attack(pkmRight, pkmRight.moves[0], pkmLeft)
+    attack(pkmRight, pkmRight.moves[0], pkmLeft)
+    updateHealthLeft()
 })
 export var rightMoveTwo = moveRight2.addEventListener('click', ()=>{
-    Battle.attack(pkmRight, pkmRight.moves[1], pkmLeft)
+    attack(pkmRight, pkmRight.moves[1], pkmLeft)
+    updateHealthLeft()
 })
 export var rightMoveThree = moveRight3.addEventListener('click', ()=>{
-    Battle.attack(pkmRight, pkmRight.moves[2], pkmLeft)
+    attack(pkmRight, pkmRight.moves[2], pkmLeft)
+    updateHealthLeft()
 })
 export var rightMoveFour = moveRight4.addEventListener('click', ()=>{
-    Battle.attack(pkmRight, pkmRight.moves[3], pkmLeft)
+    attack(pkmRight, pkmRight.moves[3], pkmLeft)
+    updateHealthLeft()
 })
 
 

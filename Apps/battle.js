@@ -1,3 +1,7 @@
+import * as App from '/Apps/app.js'
+import * as Health from '/Apps/healthbar.js'
+
+
 /* Types*/
 export var Normal = {
     "name" : "Normal",
@@ -108,6 +112,8 @@ export var Fairy = {
     "notVeryEffective": ['Fire', 'Poison', 'Steel']
 
 }
+
+export var newGame = true
 
 // Classes
 export class Pokemon{
@@ -293,7 +299,7 @@ export const attack = (attacker, move, defender) => {
     let randomNumber = randomize()
     let currentMoveAccuracy = move[3] * 100
     let currentMoveName = move[0]
-    let damage
+    let damage = 0
 
     // Display this in the message box
     console.log(attacker.name + " used " + currentMoveName + " against " + defender.name + "...")
@@ -302,13 +308,17 @@ export const attack = (attacker, move, defender) => {
         // toggleAttackFlash()
         // toggleOpacity()
         // animateHealthBar()
+        Health.updateHealthRight()
+        Health.updateHealthLeft()
         // checkKO()
             // if checkKO == true, use faint() function
         // endTurn()
+        newGame = false
         return damage
     } else{
         console.log("But it missed!")
         // endTurn()
+        newGame = false
         return 0
     }
 }

@@ -19,3 +19,8 @@
 
 import * as Battle from '/Apps/battle.js'
 import * as Moves from '/Apps/moves.js'
+import * as Health from '/Apps/healthbar.js'
+export var newGame = true
+// Moves.userLeftPkm()
+// Health.updateLeft
+// Health.updateRight
