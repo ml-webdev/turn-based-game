@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .container {
   /* Create three section grid for page */
@@ -9,6 +10,8 @@ body {
     "healthbar"
     "sprite"
     "moves";
+  height: 100vh;
+  width: 100vw;
 }
 .container > * {
   border: 2px solid black;
@@ -22,39 +25,54 @@ body {
   display: grid;
   grid-template-areas: "healthbar-left healthbar-right";
   height: auto;
-  background-color: olivedrab;
-  padding: 3rem;
+  background-color: black;
+  /* padding: 0.3rem; */
+  font-size: 20px;
 }
-.healthbar > * {
+/* .healthbar > * {
   border: 1px solid blueviolet;
-}
+} */
 #healthbar-left {
   grid-area: healthbar-left;
+  width: 95%;
 }
 #healthbar-left > * {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 1rem;
-  background-color: antiquewhite;
+  background-color: slateblue;
+  width: 100%;
+  position: relative;
 }
 #healthbar-right {
   grid-area: healthbar-right;
+  width: 95%;
 }
 #healthbar-right > * {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 1rem;
-  background-color: antiquewhite;
+  background-color: firebrick;
+  width: 100%;
+  position: relative;
 }
 #healthbar-left-hp {
   background-color: green;
   width: 100%;
   height: 100%;
   transition: width 0.5s;
+  color: white;
+  /* padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1rem; */
 }
 #healthbar-right-hp {
   background-color: green;
   width: 100%;
   height: 100%;
   transition: width 0.5s;
+  color: white;
+  /* padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1rem; */
 }
 .sprite {
   /* Display in middle third of page */
@@ -62,12 +80,12 @@ body {
   display: grid;
   grid-template-areas: "sprite-left sprite-right";
   height: auto;
-  background-color: firebrick;
-  padding: 6.5rem;
+  background-color: black;
+  /* padding: 6.5rem; */
 }
-.sprite > * {
+/* .sprite > * {
   border: 1px solid goldenrod;
-}
+} */
 #sprite-left {
   grid-area: sprite-left;
   display: grid;
@@ -77,14 +95,18 @@ body {
 }
 #sprite-left > * {
   border: 2px solid black;
-  background-color: goldenrod;
+  background-color: white;
+  width: 100%;
+  height: 100%;
 }
 #pokemon-img-left {
-  padding: 6rem;
+  padding: 0rem;
+  width: 250px;
+  height: 250px;
 }
 #pokemon-message-left {
-  padding: 2rem;
-  background-color: gray;
+  /* padding: 2rem; */
+  background-color: palegoldenrod;
 }
 
 #sprite-right {
@@ -96,14 +118,18 @@ body {
 }
 #sprite-right > * {
   border: 2px solid black;
-  background-color: palevioletred;
+  background-color: white;
+  width: 100%;
+  height: 100%;
 }
 #pokemon-img-right {
-  padding: 6rem;
+  padding: 0rem;
+  width: 250px;
+  height: 250px;
 }
 #pokemon-message-right {
-  padding: 2rem;
-  background-color: gray;
+  /* padding: 2rem; */
+  background-color: palegoldenrod;
 }
 .moves {
   /* Display in bottom third of page */
@@ -111,7 +137,7 @@ body {
   display: grid;
   grid-template-areas: "moves-left moves-right";
   height: auto;
-  background-color: blueviolet;
+  background-color: black;
 }
 .moves > * {
   border: 1px solid black;
@@ -129,11 +155,25 @@ body {
 /* Moves Left */
 #moves-left > * {
   padding: 2.5rem;
-  background-color: slategray;
-  border: 1px solid black;
+  background-color: slateblue;
+  border: 5px solid black;
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  color: white;
 }
 #moves-left-move1 {
   grid-area: pokemon-left-move1;
+}
+#moves-left > *:hover {
+  background-color: white;
+  color: slateblue;
+  cursor: pointer;
+}
+#moves-right > *:hover {
+  background-color: white;
+  color: firebrick;
+  cursor: pointer;
 }
 #moves-left-move2 {
   grid-area: pokemon-left-move2;
@@ -154,8 +194,12 @@ body {
 }
 #moves-right > * {
   padding: 2.5rem;
-  background-color: antiquewhite;
-  border: 1px solid black;
+  background-color: firebrick;
+  border: 5px solid black;
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  color: white;
 }
 #moves-right-move1 {
   grid-area: pokemon-right-move1;

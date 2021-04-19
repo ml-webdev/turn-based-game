@@ -258,21 +258,26 @@ export const typeCheck = (move, opponent) => {
     // console.log(halfDamage)
     // console.log(noDamage)
     if (dmgMultiplier == 0){
-        console.log(`It had no effect!`)
+        document.getElementById('pokemon-message-right').innerText = `It had no effect!`
+        document.getElementById('pokemon-message-left').innerText = `It had no effect!`
         return 0
     } else if (dmgMultiplier > 0 && dmgMultiplier < 0.5){
-        console.log(`It was not very effective.`)
+        document.getElementById('pokemon-message-right').innerText = `It was not very effective.`
+        document.getElementById('pokemon-message-left').innerText = `It was not very effective.`
         return 0.25
     } else if (dmgMultiplier < 1){
-        console.log(`It was not very effective!`)
+        document.getElementById('pokemon-message-right').innerText = `It was not very effective!`
+        document.getElementById('pokemon-message-left').innerText = `It was not very effective!`
         return 0.5
     } else if (dmgMultiplier == 1){
         return 1
     } else if (dmgMultiplier > 1 && dmgMultiplier < 4){
-        console.log(`It was super effective!`)
+        document.getElementById('pokemon-message-right').innerText = `It was super effective!`
+        document.getElementById('pokemon-message-left').innerText = `It was super effective!`
         return 2
     } else {
-        console.log(`It was super effective!`)
+        document.getElementById('pokemon-message-right').innerText = `It was super effective!`
+        document.getElementById('pokemon-message-left').innerText = `It was super effective!`
         return 4
     }
 }
@@ -304,7 +309,11 @@ export const checkDamage = (attacker, move, defender) => {
     let type = typeCheck(move, defender)
     let modifier = random() * stab * type
     let damage = ((level * power * (a / d) / 50) + 2) * modifier
-    console.log(attacker.name + " did " + Math.floor(damage) + ' points of damage!')
+    setTimeout(()=> {
+
+        document.getElementById('pokemon-message-left').innerText = attacker.name + " did " + Math.floor(damage) + ' points of damage!'
+        document.getElementById('pokemon-message-right').innerText = attacker.name + " did " + Math.floor(damage) + ' points of damage!'
+    }, 2000)
     return damage
 }
 let damage = 0
@@ -316,9 +325,12 @@ export const attack = (attacker, move, defender) => {
     let currentMoveName = move[0]
 
     // Display this in the message box
-    console.log(attacker.name + " used " + currentMoveName + " against " + defender.name + "...")
+    document.getElementById('pokemon-message-left').innerText = attacker.name + " used " + currentMoveName + " against " + defender.name + "..."
+    document.getElementById('pokemon-message-right').innerText = attacker.name + " used " + currentMoveName + " against " + defender.name + "..."
     if (currentMoveAccuracy >= randomNumber){
-        damage = checkDamage(attacker, move, defender)
+        damage = setTimeout(() => {
+            checkDamage(attacker, move, defender)
+        }, 2500)
         // toggleAttackFlash()
         // toggleOpacity()
         // animateHealthBar()
@@ -330,7 +342,10 @@ export const attack = (attacker, move, defender) => {
         newGame = false
         return damage
     } else{
-        console.log("But it missed!")
+        // setTimeout(()=>{
+
+        // }, 2500)
+        document.getElementById('pokemon-message-right').appendChild("But it missed!")
         // endTurn()
         newGame = false
         return damage = 0
@@ -357,43 +372,45 @@ export const updateHealthBarRight = (width) => {
 
 }
 export const userLeftPkm = () => {
-    let leftNumChoice = prompt("Player 1: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-    let gender = prompt("Is your pokemon 'Male' or 'Female'?")
-    let name = prompt("What would you like to call your Pokemon?")
+    let leftNumChoice = prompt("Blue Team: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
+    // let gender = prompt("Is your pokemon 'Male' or 'Female'?")
+    // let name = prompt("What would you like to call your Pokemon?")
     var pkmLeft
     if(leftNumChoice > 3 || leftNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         userLeftPkm()
     } else if (leftNumChoice == 1){
-        console.log(Battle)
-        pkmLeft = new Blastoise(`${name}`, 100, `${gender}`)
+        // console.log(Battle)
+        pkmLeft = new Blastoise(`Blastoise`, 100, `Male`)
+
         // console.log(pkmLeft.nickname)
     } else if (leftNumChoice == 2){
-        pkmLeft = new Charizard(`${name}`, 100, `${gender}`)
+        pkmLeft = new Charizard(`Charizard`, 100, `Male`)
         // console.log(pkmLeft.type)
     } else if (leftNumChoice == 3){
-        pkmLeft = new Venasaur(`${name}`, 100, `${gender}`)
+        pkmLeft = new Venasaur(`Venasaur`, 100, `Female`)
         // console.log(pkmLeft.moves)
     }
+    
     return pkmLeft
 
 }
 export const userRightPkm = () => {
-    let rightNumChoice = prompt("Player 2: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-    let gender = prompt("Is your pokemon 'Male' or 'Female'?")
-    let name = prompt("What would you like to call your Pokemon?")
+    let rightNumChoice = prompt("Red Team: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
+    // let gender = prompt("Is your pokemon 'Male' or 'Female'?")
+    // let name = prompt("What would you like to call your Pokemon?")
     var pkmRight
     if(rightNumChoice > 3 || rightNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         userRightPkm()
     } else if (rightNumChoice == 1){
-        pkmRight = new Blastoise(`${name}`, 100, `${gender}`)
+        pkmRight = new Blastoise(`Blastoise`, 100, `Female`)
         // console.log(pkmRight.nickname)
     } else if (rightNumChoice == 2){
-        pkmRight = new Charizard(`${name}`, 100, `${gender}`)
+        pkmRight = new Charizard(`Charizard`, 100, `Female`)
         // console.log(pkmRight.type)
     } else if (rightNumChoice == 3){
-        pkmRight = new Venasaur(`${name}`, 100, `${gender}`)
+        pkmRight = new Venasaur(`Venasaur`, 100, `Male`)
 
         // console.log(pkmRight.moves)
     }
@@ -421,12 +438,18 @@ export var pkmRight = userRightPkm()
             // console.log("Moves.pkmLeft.health: " + Moves.pkmLeft)
             if(leftCurrentHealth - damage <= 0){
                 leftCurrentHealth = 0
+                updateHealthBarLeft(playerLeftHealth)
+                setTimeout(()=>{
+
+                    return alert("Pokemon fainted, Red Team won the battle!")
+                }, 1250)
             } else{
                 leftCurrentHealth -= damage
             }
             var playerLeftHealth = leftCurrentHealth / pkmLeft.stats.hp
         console.log("Left health is updated: " + playerLeftHealth)
         updateHealthBarLeft(playerLeftHealth)
+        damage = 0
         // }
 
     } 
@@ -440,6 +463,10 @@ export var pkmRight = userRightPkm()
         // else {
             if(rightCurrentHealth - damage <= 0){
                 rightCurrentHealth = 0
+                setTimeout(()=>{
+
+                    return alert("Pokemon fainted, Blue Team won the battle!")
+                }, 1250)
             } else{
                 rightCurrentHealth -= damage
             }            
@@ -447,6 +474,7 @@ export var pkmRight = userRightPkm()
         //     console.log(Battle.damage)
         console.log("Right health is updated: " + playerRightHealth)
         updateHealthBarRight(playerRightHealth)
+        damage = 0
 
         // }
         
@@ -489,6 +517,17 @@ export const populateMovesRight = (pkmMovelist) =>{
 }
 export var populateLeft = populateMovesLeft(pkmLeft.moves)
 export var populateRight = populateMovesRight(pkmRight.moves)
+
+export const populateSpriteLeft = () =>{
+    document.getElementById('healthbar-left-name').innerText = `${pkmLeft.name}`
+    document.getElementById('pokemon-img-left').src = `/Styles/Images/${pkmLeft.name}.png` 
+}
+export const populateSpriteRight = () =>{
+    document.getElementById('healthbar-right-name').innerText = `${pkmRight.name}`
+    document.getElementById('pokemon-img-right').src = `/Styles/Images/${pkmRight.name}.png` 
+}
+populateSpriteLeft()
+populateSpriteRight()
 
 
 
