@@ -301,7 +301,7 @@ export const checkDamage = (attacker, move, defender) => {
 
         document.getElementById('pokemon-message-left').innerText = attacker.name + " did " + Math.floor(damage) + ' points of damage!'
         document.getElementById('pokemon-message-right').innerText = attacker.name + " did " + Math.floor(damage) + ' points of damage!'
-    }, 3000)
+    }, 1500)
     return damage
 }
 let damage = 0
@@ -310,24 +310,22 @@ let damage = 0
 export const attack = (attacker, move, defender) => {
     let randomNumber = randomize()
     let currentMoveAccuracy = move[3] * 100
-    let currentMoveName = move[0]
     // Display this in the message box
     // document.getElementById('pokemon-message-left').innerText = attacker.name + " used " + currentMoveName + " against " + defender.name + "..."
     // document.getElementById('pokemon-message-right').innerText = attacker.name + " used " + currentMoveName + " against " + defender.name + "..."
 
     if (currentMoveAccuracy >= randomNumber){
-        damage = setTimeout(() => {
-            checkDamage(attacker, move, defender)
-        }, 2500)
+        console.log(currentMoveAccuracy)
+        console.log(randomNumber)
         newGame = false
-        return damage
+        return
     } else if (currentMoveAccuracy < randomNumber){
         setTimeout(()=>{
             document.getElementById('pokemon-message-left').innerHTML = "But it missed!"
             document.getElementById('pokemon-message-right').innerHTML = "But it missed!"
             newGame = false
             return damage = 0
-        }, 2500)
+        }, 2000)
     }
 }
 
@@ -381,10 +379,13 @@ var playerLeftHealth
     export const updateHealthLeft = (attacker, move, defender) =>{
         var damage = checkDamage(attacker, move, defender)
             if(leftCurrentHealth - damage <= 0){
-                leftCurrentHealth = 0
+                // leftCurrentHealth = 0
                 setTimeout(()=>{
 
-                    return alert("Pokemon fainted, Red Team won the battle!")
+                    alert("Pokemon fainted, Red Team won the battle!")
+                    setTimeout(() => {
+                        location.reload()
+                    }, 500);
                 }, 1250)
             } else{
                 leftCurrentHealth -= damage
