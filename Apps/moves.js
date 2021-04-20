@@ -234,9 +234,7 @@ export const typeCheck = (move, opponent) => {
         
         if (item == opponent.type){
             superAccumulator++
-            // return console.log("doubleDamage is " + doubleDamage)
         }
-        // console.log("accumulator: " + superAccumulator)
         doubleDamage = Math.pow(2, superAccumulator)
         
     })
@@ -254,7 +252,7 @@ export const typeCheck = (move, opponent) => {
     })
 
     let dmgMultiplier = doubleDamage * halfDamage * noDamage
-    
+
     if (dmgMultiplier == 0){
         document.getElementById('pokemon-message-right').innerText = `It had no effect!`
         document.getElementById('pokemon-message-left').innerText = `It had no effect!`
