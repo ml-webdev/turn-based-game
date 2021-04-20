@@ -379,12 +379,11 @@ var playerLeftHealth
 var leftCurrentHealth = pkmLeft.stats.hp
     export const updateHealthLeft = (attacker, move, defender) =>{
         var damage = checkDamage(attacker, move, defender)
-        updateHealthBarLeft(playerLeftHealth)
-            if(leftCurrentHealth - damage <= 0){
-                // leftCurrentHealth = 0
-                // updateHealthBarLeft(playerLeftHealth)
-                setTimeout(()=>{
-                    alert("Pokemon fainted, Red Team won the battle!")
+        if(leftCurrentHealth - damage <= 0){
+            // leftCurrentHealth = 0
+            // updateHealthBarLeft(playerLeftHealth)
+            setTimeout(()=>{
+                alert("Pokemon fainted, Red Team won the battle!")
                     setTimeout(() => {
                         location.reload()
                     }, 1500);
@@ -393,6 +392,7 @@ var leftCurrentHealth = pkmLeft.stats.hp
                 leftCurrentHealth -= damage
             }
             playerLeftHealth = leftCurrentHealth / pkmLeft.stats.hp
+            updateHealthBarLeft(playerLeftHealth)
         damage = 0
     } 
     var rightCurrentHealth = pkmRight.stats.hp
@@ -411,8 +411,8 @@ var leftCurrentHealth = pkmLeft.stats.hp
                 rightCurrentHealth -= checkDamage(attacker, move, defender)
             }            
             playerRightHealth = rightCurrentHealth / pkmRight.stats.hp
+            updateHealthBarRight(playerRightHealth)
         console.log("Right health is updated: " + playerRightHealth)
-        updateHealthBarRight(playerRightHealth)
         damage = 0
 
         
