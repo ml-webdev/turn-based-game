@@ -330,7 +330,7 @@ export const attack = (attacker, move, defender) => {
 }
 
 
-// HEALTHBAR ANIMATION FUNCTION
+// HEALTHBAR ANIMATION FUNCTIONS
 export const updateHealthBarLeft = (width) => {
     document.getElementById("healthbar-left-hp").style.width = `${width * 100}%`
 }
@@ -376,7 +376,7 @@ export const userRightPkm = () => {
 export var pkmLeft = userLeftPkm()
 export var pkmRight = userRightPkm()
 var playerLeftHealth
-    var leftCurrentHealth = pkmLeft.stats.hp
+var leftCurrentHealth = pkmLeft.stats.hp
     export const updateHealthLeft = (attacker, move, defender) =>{
         var damage = checkDamage(attacker, move, defender)
         updateHealthBarLeft(playerLeftHealth)
