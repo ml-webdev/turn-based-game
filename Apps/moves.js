@@ -297,11 +297,16 @@ export const checkDamage = (attacker, move, defender) => {
     let type = typeCheck(move, defender)
     let modifier = random() * stab * type
     let damage = ((level * power * (a / d) / 50) + 2) * modifier
-    setTimeout(()=> {
+    if (damage > 0){setTimeout(()=> {
 
         document.getElementById('pokemon-message-left').innerText = attacker.name + " did " + Math.floor(damage) + ' points of damage!'
         document.getElementById('pokemon-message-right').innerText = attacker.name + " did " + Math.floor(damage) + ' points of damage!'
-    }, 1500)
+    }, 1500)} 
+    else if (damage <= 0){
+        document.getElementById('pokemon-message-left').innerText = attacker.name + " attack missed!"
+        document.getElementById('pokemon-message-right').innerText = attacker.name + " attack missed!"
+        
+    }
     return damage
 }
 let damage = 0
@@ -377,43 +382,44 @@ export var pkmLeft = userLeftPkm()
 export var pkmRight = userRightPkm()
 var playerLeftHealth
 var leftCurrentHealth = pkmLeft.stats.hp
-    export const updateHealthLeft = (attacker, move, defender) =>{
-        var damage = checkDamage(attacker, move, defender)
-        if(leftCurrentHealth - damage <= 0){
-            // leftCurrentHealth = 0
-            // updateHealthBarLeft(playerLeftHealth)
-            setTimeout(()=>{
-                alert("Pokemon fainted, Red Team won the battle!")
-                    setTimeout(() => {
-                        location.reload()
-                    }, 1500);
-                }, 1250)
-            } else{
-                leftCurrentHealth -= damage
-            }
-            playerLeftHealth = leftCurrentHealth / pkmLeft.stats.hp
-            updateHealthBarLeft(playerLeftHealth)
-        damage = 0
-    } 
-    var rightCurrentHealth = pkmRight.stats.hp
-    var playerRightHealth
-    export const updateHealthRight = (attacker, move, defender) => {
-            if(rightCurrentHealth - damage <= 0){
-                rightCurrentHealth = 0
-                setTimeout(()=>{
 
-                    alert("Pokemon fainted, Blue Team won the battle!")
-                    setTimeout(() => {
-                        location.reload()
-                    }, 500);
-                }, 1250)
-            } else{
-                rightCurrentHealth -= checkDamage(attacker, move, defender)
-            }            
-            playerRightHealth = rightCurrentHealth / pkmRight.stats.hp
-            updateHealthBarRight(playerRightHealth)
-        console.log("Right health is updated: " + playerRightHealth)
-        damage = 0
+export const updateHealthLeft = (attacker, move, defender) =>{
+        var damage = checkDamage(attacker, move, defender)
+    if(leftCurrentHealth - damage <= 0){
+        leftCurrentHealth = 0
+        updateHealthBarLeft(playerLeftHealth)
+        setTimeout(()=>{
+            alert("Pokemon fainted, Red Team won the battle!")
+                setTimeout(() => {
+                    location.reload()
+                }, 1500);
+            }, 1250)
+        } else{
+            leftCurrentHealth -= damage
+        }
+    playerLeftHealth = leftCurrentHealth / pkmLeft.stats.hp
+    updateHealthBarLeft(playerLeftHealth)
+    damage = 0
+    } 
+var rightCurrentHealth = pkmRight.stats.hp
+var playerRightHealth
+export const updateHealthRight = (attacker, move, defender) => {
+    var damage = checkDamage(attacker, move, defender)
+    if(rightCurrentHealth - damage <= 0){
+        rightCurrentHealth = 0
+        updateHealthBarRight(playerRightHealth)
+        setTimeout(()=>{
+            alert("Pokemon fainted, Blue Team won the battle!")
+            setTimeout(() => {
+                location.reload()
+            }, 500);
+        }, 1250)
+    } else{
+        rightCurrentHealth -= checkDamage(attacker, move, defender)
+    }            
+    playerRightHealth = rightCurrentHealth / pkmRight.stats.hp
+    updateHealthBarRight(playerRightHealth)
+    damage = 0
 
         
     }
@@ -450,39 +456,39 @@ populateSpriteRight()
 
 // EVENT LISTENERS
 export var leftMoveOne = moveLeft1.addEventListener('click', ()=>{
-    attack(pkmLeft, pkmLeft.moves[0], pkmRight)
+    // attack(pkmLeft, pkmLeft.moves[0], pkmRight)
     updateHealthRight(pkmLeft, pkmLeft.moves[0], pkmRight)
 })
 export var leftMoveTwo = moveLeft2.addEventListener('click', ()=>{
-    attack(pkmLeft, pkmLeft.moves[1], pkmRight)
+    // attack(pkmLeft, pkmLeft.moves[1], pkmRight)
     updateHealthRight(pkmLeft, pkmLeft.moves[1], pkmRight)
 
 })
 export var leftMoveThree = moveLeft3.addEventListener('click', ()=>{
-    attack(pkmLeft, pkmLeft.moves[2], pkmRight)
+    // attack(pkmLeft, pkmLeft.moves[2], pkmRight)
     updateHealthRight(pkmLeft, pkmLeft.moves[2], pkmRight)
 
 })
 export var leftMoveFour = moveLeft4.addEventListener('click', ()=>{
-    attack(pkmLeft, pkmLeft.moves[3], pkmRight)
+    // attack(pkmLeft, pkmLeft.moves[3], pkmRight)
     updateHealthRight(pkmLeft, pkmLeft.moves[3], pkmRight)
 
 })
 
 
 export var rightMoveOne = moveRight1.addEventListener('click', ()=>{
-    attack(pkmRight, pkmRight.moves[0], pkmLeft)
+    // attack(pkmRight, pkmRight.moves[0], pkmLeft)
     updateHealthLeft(pkmRight, pkmRight.moves[0], pkmLeft)
 })
 export var rightMoveTwo = moveRight2.addEventListener('click', ()=>{
-    attack(pkmRight, pkmRight.moves[1], pkmLeft)
+    // attack(pkmRight, pkmRight.moves[1], pkmLeft)
     updateHealthLeft(pkmRight, pkmRight.moves[1], pkmLeft)
 })
 export var rightMoveThree = moveRight3.addEventListener('click', ()=>{
-    attack(pkmRight, pkmRight.moves[2], pkmLeft)
+    // attack(pkmRight, pkmRight.moves[2], pkmLeft)
     updateHealthLeft(pkmRight, pkmRight.moves[2], pkmLeft)
 })
 export var rightMoveFour = moveRight4.addEventListener('click', ()=>{
-    attack(pkmRight, pkmRight.moves[3], pkmLeft)
+    // attack(pkmRight, pkmRight.moves[3], pkmLeft)
     updateHealthLeft(pkmRight, pkmRight.moves[3], pkmLeft)
 })
