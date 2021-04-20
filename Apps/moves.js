@@ -1,6 +1,3 @@
-import * as Battle from '/Apps/battle.js'
-import * as App from '/Apps/app.js'
-
 // VARIABLES
 export var movesLeft = document.getElementById('moves-left')
 export var movesRight = document.getElementById('moves-right')
@@ -227,11 +224,7 @@ export const typeCheck = (move, opponent) => {
 
     let superAccumulator = 0
     let notVeryAccumulator = 0
-    moveType.superEffective.forEach((item)=>{
-        // console.log(item)
-        // console.log(opponent.type)
-        // console.log(item == opponent.type)
-        
+    moveType.superEffective.forEach((item)=>{      
         if (item == opponent.type){
             superAccumulator++
         }
@@ -329,10 +322,12 @@ export const attack = (attacker, move, defender) => {
         }, 2500)
         newGame = false
         return damage
-    } else{
-        document.getElementById('pokemon-message-right').appendChild("But it missed!")
-        newGame = false
-        return damage = 0
+    } else if (currentMoveAccuracy < randomNumber){
+        setTimeout(()=>{
+            document.getElementById('pokemon-message-right').appendChild("But it missed!")
+            newGame = false
+            return damage = 0
+        }, 2500)
     }
 }
 
