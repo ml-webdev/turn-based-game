@@ -380,6 +380,9 @@ export const userRightPkm = () => {
 }
 export var pkmLeft = userLeftPkm()
 export var pkmRight = userRightPkm()
+
+
+// HEALTH BAR FUNCTION
 var playerLeftHealth
 var leftCurrentHealth = pkmLeft.stats.hp
 
@@ -401,8 +404,10 @@ export const updateHealthLeft = (attacker, move, defender) =>{
     updateHealthBarLeft(playerLeftHealth)
     damage = 0
     } 
+
 var rightCurrentHealth = pkmRight.stats.hp
 var playerRightHealth
+
 export const updateHealthRight = (attacker, move, defender) => {
     var damage = checkDamage(attacker, move, defender)
     if(rightCurrentHealth - damage <= 0){
@@ -424,7 +429,7 @@ export const updateHealthRight = (attacker, move, defender) => {
         
     }
 
-
+// POPULATE MOVES FUNCTION
 export const populateMovesLeft = (pkmMovelist) =>{
     moveLeft1.innerHTML = pkmMovelist[0][0]
     moveLeft2.innerHTML = pkmMovelist[1][0]
