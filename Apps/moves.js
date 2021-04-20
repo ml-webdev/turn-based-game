@@ -254,9 +254,7 @@ export const typeCheck = (move, opponent) => {
     })
 
     let dmgMultiplier = doubleDamage * halfDamage * noDamage
-    // console.log(doubleDamage)
-    // console.log(halfDamage)
-    // console.log(noDamage)
+    
     if (dmgMultiplier == 0){
         document.getElementById('pokemon-message-right').innerText = `It had no effect!`
         document.getElementById('pokemon-message-left').innerText = `It had no effect!`
@@ -331,65 +329,36 @@ export const attack = (attacker, move, defender) => {
         damage = setTimeout(() => {
             checkDamage(attacker, move, defender)
         }, 2500)
-        // toggleAttackFlash()
-        // toggleOpacity()
-        // animateHealthBar()
-        // updateHealthRight()
-        // updateHealthLeft()
-        // checkKO()
-            // if checkKO == true, use faint() function
-        // endTurn()
         newGame = false
         return damage
     } else{
-        // setTimeout(()=>{
-
-        // }, 2500)
         document.getElementById('pokemon-message-right').appendChild("But it missed!")
-        // endTurn()
         newGame = false
         return damage = 0
     }
 }
 
-// console.log(App.newGame)
-
-// export var healthbarLeft = document.getElementById("healthbar-left-hp").style.width
-// console.log("Health bar left " + healthbarLeft)
-// export var healthbarRight = document.getElementById("healthbar-right-hp").style.width
-// console.log(playerRightHealth)
-
-
 
 // FUNCTIONS
 export const updateHealthBarLeft = (width) => {
     document.getElementById("healthbar-left-hp").style.width = `${width * 100}%`
-    // console.log(healthbarLeft)
 }
 export const updateHealthBarRight = (width) => {
     document.getElementById("healthbar-right-hp").style.width = `${width * 100}%`
-    // console.log(healthbarRight)
-
 }
 export const userLeftPkm = () => {
     let leftNumChoice = prompt("Blue Team: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-    // let gender = prompt("Is your pokemon 'Male' or 'Female'?")
-    // let name = prompt("What would you like to call your Pokemon?")
     var pkmLeft
     if(leftNumChoice > 3 || leftNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         return userLeftPkm()
     } else if (leftNumChoice == 1){
-        // console.log(Battle)
         pkmLeft = new Blastoise(`Blastoise`, 100, `Male`)
 
-        // console.log(pkmLeft.nickname)
     } else if (leftNumChoice == 2){
         pkmLeft = new Charizard(`Charizard`, 100, `Male`)
-        // console.log(pkmLeft.type)
     } else if (leftNumChoice == 3){
         pkmLeft = new Venasaur(`Venasaur`, 100, `Female`)
-        // console.log(pkmLeft.moves)
     }
     
     return pkmLeft
@@ -397,22 +366,17 @@ export const userLeftPkm = () => {
 }
 export const userRightPkm = () => {
     let rightNumChoice = prompt("Red Team: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-    // let gender = prompt("Is your pokemon 'Male' or 'Female'?")
-    // let name = prompt("What would you like to call your Pokemon?")
     var pkmRight
     if(rightNumChoice > 3 || rightNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         return userRightPkm()
     } else if (rightNumChoice == 1){
         pkmRight = new Blastoise(`Blastoise`, 100, `Female`)
-        // console.log(pkmRight.nickname)
     } else if (rightNumChoice == 2){
         pkmRight = new Charizard(`Charizard`, 100, `Female`)
-        // console.log(pkmRight.type)
     } else if (rightNumChoice == 3){
         pkmRight = new Venasaur(`Venasaur`, 100, `Male`)
 
-        // console.log(pkmRight.moves)
     }
     return pkmRight
 
@@ -420,22 +384,8 @@ export const userRightPkm = () => {
 export var pkmLeft = userLeftPkm()
 export var pkmRight = userRightPkm()
 
-// console.log(pkmLeft)
-// console.log(pkmRight)
-// Moves.pkmLeft
-// Moves.pkmRight
-// health starts out at 100%, which is the total hp of the pokemon
-    // updateHealthLeft function
     var leftCurrentHealth = pkmLeft.stats.hp
     export const updateHealthLeft = () =>{
-        // if (newGame == true){
-            // player1 healthbar = pkmLeft.health
-            // playerLeftHealth = pkmLeft.stats.hp
-            // console.log(playerLeftHealth)
-
-        // }
-        // else {
-            // console.log("Moves.pkmLeft.health: " + Moves.pkmLeft)
             if(leftCurrentHealth - damage <= 0){
                 leftCurrentHealth = 0
                 updateHealthBarLeft(playerLeftHealth)
@@ -447,20 +397,11 @@ export var pkmRight = userRightPkm()
                 leftCurrentHealth -= damage
             }
             var playerLeftHealth = leftCurrentHealth / pkmLeft.stats.hp
-        console.log("Left health is updated: " + playerLeftHealth)
         updateHealthBarLeft(playerLeftHealth)
         damage = 0
-        // }
-
     } 
     var rightCurrentHealth = pkmRight.stats.hp
     export const updateHealthRight = () => {
-        // if (newGame == true){
-            // player1 healthbar = pkmLeft.health
-            // playerRightHealth = pkmRight.health
-            
-        // }
-        // else {
             if(rightCurrentHealth - damage <= 0){
                 rightCurrentHealth = 0
                 setTimeout(()=>{
@@ -471,37 +412,13 @@ export var pkmRight = userRightPkm()
                 rightCurrentHealth -= damage
             }            
             var playerRightHealth = rightCurrentHealth / pkmRight.stats.hp
-        //     console.log(Battle.damage)
         console.log("Right health is updated: " + playerRightHealth)
         updateHealthBarRight(playerRightHealth)
         damage = 0
 
-        // }
         
     }
-// updateHealthLeft()
-// updateHealthRight() 
-    // export var updateLeft = updateHealthLeft()
-    // export var updateRight = updateHealthRight()
-    // updateHealthRight function
-        // if (newGame == true)
-            // player2 healthbar.value = pkmRight.health
-        // else {
-            // rightCurrentHealth = pkmRight.health - damage
-            // player1 healthbar.value = rightCurrentHealth / pkmRight.health
-        // }
 
-//
-
-// if move misses, end turn
-    // else if move hits toggle opacity for defending pokemon
-// health subtracts number returned from attack function
-    // health -= attack()
-// keyframe transition for health bar
-// if healthbar is > 50%, green
-// if healthbar is <= 50% && > 10%, yellow
-// if healthbar is <= 10% && > 0%, red
-// if health is = 0, pokemon faints
 
 export const populateMovesLeft = (pkmMovelist) =>{
     moveLeft1.innerHTML = pkmMovelist[0][0]
@@ -570,8 +487,3 @@ export var rightMoveFour = moveRight4.addEventListener('click', ()=>{
     attack(pkmRight, pkmRight.moves[3], pkmLeft)
     updateHealthLeft()
 })
-
-
-// console.log(moves)
-// console.log(movesLeft)
-// console.log(movesRight)
