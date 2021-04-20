@@ -330,13 +330,14 @@ export const attack = (attacker, move, defender) => {
 }
 
 
-// FUNCTIONS
+// HEALTHBAR ANIMATION FUNCTION
 export const updateHealthBarLeft = (width) => {
     document.getElementById("healthbar-left-hp").style.width = `${width * 100}%`
 }
 export const updateHealthBarRight = (width) => {
     document.getElementById("healthbar-right-hp").style.width = `${width * 100}%`
 }
+// USER SELECTION FUNCTIONS
 export const userLeftPkm = () => {
     let leftNumChoice = prompt("Blue Team: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
     var pkmLeft
