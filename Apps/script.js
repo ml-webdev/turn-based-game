@@ -363,7 +363,6 @@ export const userLeftPkm = () => {
 }
 export const userRightPkm = () => {
     let rightNumChoice = prompt("Red Team: Choose Blastoise(1), Charizard(2), or Venasaur(3)")
-    var pkmRight
     if(rightNumChoice > 3 || rightNumChoice < 1){
         alert('You must choose either 1, 2, or 3')
         return userRightPkm()
@@ -387,7 +386,7 @@ var playerLeftHealth
 var leftCurrentHealth = pkmLeft.stats.hp
 
 export const updateHealthLeft = (attacker, move, defender) =>{
-        var damage = checkDamage(attacker, move, defender)
+        damage = checkDamage(attacker, move, defender)
     if(leftCurrentHealth - damage <= 0){
         leftCurrentHealth = 0
         updateHealthBarLeft(playerLeftHealth)
@@ -409,7 +408,7 @@ var rightCurrentHealth = pkmRight.stats.hp
 var playerRightHealth
 
 export const updateHealthRight = (attacker, move, defender) => {
-    var damage = checkDamage(attacker, move, defender)
+    damage = checkDamage(attacker, move, defender)
     if(rightCurrentHealth - damage <= 0){
         rightCurrentHealth = 0
         updateHealthBarRight(playerRightHealth)
